@@ -10,6 +10,26 @@ library(tidyverse)
 library(palmerpenguins)
 library(lubridate)
 
+```
+
+
+```{r}
+palmerpenguins <- palmerpenguins::penguins
+refresher_1 <- palmerpenguins |>
+  filter(island == c("Biscoe","Dream")) |>
+  select(-year, -sex) |>
+  mutate(body_mass_kg = body_mass_g / 1000) |>
+  rename(location = island)
+
+```
+
+
+```{r}
+refresher_2 <- palmerpenguins |>
+  filter(species == "Adelie") |>
+  filter(is.na(flipper_length_mm)) |>
+  group_by(sex) |>
+  summarize(penguin_mean = mean(flipper_length_mm, na.rm = TRUE), penguin_stdev = sd(flipper_length_mm, na.rm = TRUE), penguin_sum = n()) 
 
 
 ```
